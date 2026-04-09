@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skylo × SketchDeck — Visual Brand Guide Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sd-navy:    #161638;
+    --sd-blue:    #0074E0;
+    --sd-lavender:#B8ACFF;
+    --sd-salmon:  #F07374;
+    --sd-yellow:  #DBE000;
+    --sd-offwhite:#EEECEA;
+    --sd-white:   #FFFFFF;
+    --sd-dark:    #111111;
+    --sd-mid:     #54595F;
+    --sd-border:  rgba(22,22,56,0.1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--sd-white); color: var(--sd-dark); font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 600; text-transform: uppercase; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; height: 72px; background: var(--sd-white); border-bottom: 1px solid var(--sd-border); }
+  .nav-wordmark { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--sd-navy); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; }
+  nav ul { list-style: none; display: flex; gap: 32px; align-items: center; }
+  nav a { font-size: 14px; font-weight: 500; color: var(--sd-dark); text-decoration: none; transition: color 0.2s; }
+  nav a:hover { color: var(--sd-blue); }
+  .nav-cta { background: var(--sd-navy) !important; color: var(--sd-white) !important; padding: 10px 24px; border-radius: 50px; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--sd-blue) !important; color: white !important; }
+
+  /* HERO */
+  .hero { background: var(--sd-navy); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 80px 80px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 20%, rgba(184,172,255,0.16) 0%, transparent 55%), radial-gradient(ellipse at 10% 90%, rgba(0,116,224,0.12) 0%, transparent 45%); pointer-events: none; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 50px; padding: 6px 18px; font-size: 12px; font-weight: 500; color: var(--sd-lavender); letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 40px; width: fit-content; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(52px, 6.5vw, 92px); line-height: 1.0; letter-spacing: -1px; color: var(--sd-white); margin-bottom: 28px; position: relative; z-index: 1; max-width: 860px; }
+  .hero h1 .hl { color: var(--sd-blue); }
+  .hero-sub { font-size: 18px; font-weight: 400; color: rgba(255,255,255,0.55); max-width: 560px; line-height: 1.75; margin-bottom: 48px; position: relative; z-index: 1; }
+  .hero-actions { display: flex; gap: 14px; align-items: center; position: relative; z-index: 1; margin-bottom: 72px; }
+  .btn-blue { background: var(--sd-blue); color: var(--sd-white); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .btn-blue:hover { background: #005bb5; transform: translateY(-1px); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,0.28); color: rgba(255,255,255,0.75); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.65); color: white; }
+  .hero-stats { display: flex; gap: 56px; flex-wrap: wrap; padding-top: 56px; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 1; }
+  .hero-stat strong { display: block; font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 600; text-transform: uppercase; color: var(--sd-white); margin-bottom: 4px; }
+  .hero-stat span { font-size: 13px; color: rgba(255,255,255,0.42); }
+
+  /* SECTIONS */
+  .sec { padding: 100px 80px; }
+  .sec-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sd-blue); margin-bottom: 20px; display: block; }
+  .sec-h { font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: 0px; color: var(--sd-navy); margin-bottom: 18px; }
+  .sec-p { font-size: 17px; color: var(--sd-mid); max-width: 560px; line-height: 1.75; }
+
+  /* INTRO / WHY */
+  .intro { background: var(--sd-offwhite); }
+  .intro .sec-h { color: var(--sd-navy); }
+  .intro-head { margin-bottom: 60px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .card { background: var(--sd-white); border-radius: 16px; padding: 36px 32px; border: 1px solid var(--sd-border); transition: box-shadow 0.25s, transform 0.25s; position: relative; overflow: hidden; }
+  .card:hover { box-shadow: 0 8px 40px rgba(22,22,56,0.1); transform: translateY(-2px); }
+  .card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 16px 16px 0 0; }
+  .card:nth-child(1)::after { background: var(--sd-blue); }
+  .card:nth-child(2)::after { background: var(--sd-lavender); }
+  .card:nth-child(3)::after { background: var(--sd-salmon); }
+  .card-ico { font-size: 26px; margin-bottom: 18px; display: block; }
+  .card h3 { font-size: 18px; font-weight: 600; color: var(--sd-navy); margin-bottom: 10px; letter-spacing: -0.2px; }
+  .card p { font-size: 14px; color: var(--sd-mid); line-height: 1.7; }
+
+  /* MENU / SCOPE */
+  .scope-sec { background: var(--sd-white); }
+  .scope-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; margin-bottom: 64px; }
+  .scope-note { font-size: 14px; color: var(--sd-mid); line-height: 1.75; padding: 24px 28px; background: rgba(0,116,224,0.06); border-left: 3px solid var(--sd-blue); border-radius: 0 10px 10px 0; }
+  .scope-note strong { color: var(--sd-navy); font-weight: 600; }
+
+  /* MENU ITEMS */
+  .menu { display: flex; flex-direction: column; gap: 12px; }
+  .menu-item { border: 1px solid var(--sd-border); border-radius: 16px; overflow: hidden; background: var(--sd-white); transition: box-shadow 0.2s; }
+  .menu-item:hover { box-shadow: 0 4px 24px rgba(22,22,56,0.08); }
+  .menu-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 36px; cursor: pointer; gap: 20px; }
+  .menu-header-left { display: flex; align-items: center; gap: 20px; flex: 1; }
+  .menu-num { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); background: var(--sd-navy); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; letter-spacing: 0; }
+  .menu-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 600; color: var(--sd-navy); letter-spacing: -0.2px; }
+  .menu-price { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 600; color: var(--sd-blue); white-space: nowrap; }
+  .menu-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; background: rgba(240,115,116,0.12); color: var(--sd-salmon); white-space: nowrap; }
+  .menu-badge.optional { background: rgba(184,172,255,0.15); color: var(--sd-lavender); color: #8B7FCC; }
+  .menu-chevron { font-size: 18px; color: var(--sd-mid); transition: transform 0.25s; flex-shrink: 0; }
+  .menu-item.open .menu-chevron { transform: rotate(180deg); }
+  .menu-body { display: none; padding: 0 36px 32px; border-top: 1px solid var(--sd-border); }
+  .menu-body.visible { display: block; }
+  .menu-body-inner { padding-top: 28px; display: grid; grid-template-columns: 1fr 280px; gap: 48px; align-items: start; }
+  .menu-deliverables { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sd-blue); margin-bottom: 10px; }
+  .menu-list { list-style: none; margin-bottom: 20px; }
+  .menu-list li { font-size: 14px; color: var(--sd-mid); padding: 7px 0; border-bottom: 1px solid rgba(22,22,56,0.06); display: flex; align-items: flex-start; gap: 10px; line-height: 1.55; }
+  .menu-list li:last-child { border: none; }
+  .menu-list li::before { content: '→'; color: var(--sd-blue); font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+  .menu-list.sub-list li::before { content: '↳'; color: var(--sd-lavender); }
+  .menu-side-card { background: var(--sd-offwhite); border-radius: 14px; padding: 28px 24px; }
+  .menu-side-card .label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sd-mid); margin-bottom: 6px; }
+  .menu-side-card .amount { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 600; color: var(--sd-navy); margin-bottom: 2px; }
+  .menu-side-card .sub { font-size: 13px; color: var(--sd-mid); margin-bottom: 20px; }
+  .menu-side-card .drow { display: flex; justify-content: space-between; font-size: 13px; padding: 7px 0; border-bottom: 1px solid rgba(22,22,56,0.07); }
+  .menu-side-card .drow:last-child { border: none; padding-bottom: 0; }
+  .menu-side-card .drow span:first-child { color: var(--sd-mid); }
+  .menu-side-card .drow span:last-child { font-weight: 600; color: var(--sd-navy); }
+  .deliverable-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,116,224,0.08); border: 1px solid rgba(0,116,224,0.15); border-radius: 50px; padding: 5px 14px; font-size: 12px; font-weight: 500; color: var(--sd-blue); margin-top: 16px; }
+
+  /* OPTIONAL CALL-OUT within menu */
+  .optional-callout { background: rgba(184,172,255,0.12); border-radius: 10px; padding: 16px 20px; margin-top: 16px; }
+  .optional-callout p { font-size: 13px; color: var(--sd-mid); line-height: 1.65; }
+  .optional-callout strong { color: var(--sd-navy); }
+
+  /* SUMMARY / INVESTMENT */
+  .investment-sec { background: var(--sd-offwhite); }
+  .invest-grid { display: grid; grid-template-columns: 1fr 340px; gap: 40px; margin-top: 60px; align-items: start; }
+  .table-wrap { background: var(--sd-white); border-radius: 16px; overflow: hidden; border: 1px solid var(--sd-border); }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: var(--sd-navy); color: rgba(255,255,255,0.55); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 20px; text-align: left; }
+  td { padding: 13px 20px; font-size: 14px; color: var(--sd-mid); border-bottom: 1px solid rgba(22,22,56,0.06); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; background: rgba(0,116,224,0.04); font-family: 'Syne', sans-serif; font-weight: 600; color: var(--sd-navy); font-size: 16px; border-top: 2px solid var(--sd-blue); }
+  tr:hover:not(:last-child) td { background: rgba(22,22,56,0.018); }
+  .opt-tag { font-size: 10px; font-weight: 600; background: rgba(184,172,255,0.2); color: #8B7FCC; padding: 2px 9px; border-radius: 50px; letter-spacing: 0.06em; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+  .invest-side { display: flex; flex-direction: column; gap: 14px; }
+  .total-card { background: var(--sd-blue); border-radius: 16px; padding: 34px 26px; }
+  .total-card p { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.68); margin-bottom: 6px; }
+  .total-card strong { display: block; font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 600; color: white; margin-bottom: 4px; }
+  .total-card span { font-size: 13px; color: rgba(255,255,255,0.62); }
+  .detail-card { background: var(--sd-white); border-radius: 16px; padding: 22px 26px; border: 1px solid var(--sd-border); }
+  .drow { display: flex; justify-content: space-between; font-size: 13px; padding: 8px 0; border-bottom: 1px solid rgba(22,22,56,0.06); }
+  .drow:last-child { border: none; padding-bottom: 0; }
+  .drow span:first-child { color: var(--sd-mid); }
+  .drow span:last-child { font-weight: 600; color: var(--sd-navy); }
+
+  /* TEMPLATES */
+  .templates-sec { background: var(--sd-navy); }
+  .templates-sec .sec-h { color: var(--sd-white); }
+  .templates-sec .sec-p { color: rgba(255,255,255,0.5); }
+  .templates-sec .sec-tag { color: var(--sd-lavender); }
+  .templates-head { margin-bottom: 56px; }
+  .template-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .template-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 32px 28px; transition: background 0.2s, border-color 0.2s; }
+  .template-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(184,172,255,0.3); }
+  .template-ico { font-size: 28px; margin-bottom: 16px; display: block; }
+  .template-name { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 600; color: var(--sd-white); margin-bottom: 8px; }
+  .template-desc { font-size: 14px; color: rgba(255,255,255,0.48); line-height: 1.65; margin-bottom: 24px; }
+  .template-pricing { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; align-items: baseline; gap: 10px; justify-content: space-between; }
+  .template-credits { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 600; color: var(--sd-lavender); }
+  .template-credits span { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.35); display: block; margin-top: 2px; }
+  .template-usd { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.65); }
+  .templates-note { margin-top: 36px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 22px 28px; }
+  .templates-note p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+  .templates-note strong { color: rgba(255,255,255,0.75); }
+
+  /* WORK EXAMPLES */
+  .work-sec { background: var(--sd-offwhite); }
+  .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+  .work-card { background: var(--sd-white); border-radius: 16px; overflow: hidden; border: 1px solid var(--sd-border); transition: box-shadow 0.25s, transform 0.2s; }
+  .work-card:hover { box-shadow: 0 8px 32px rgba(22,22,56,0.1); transform: translateY(-2px); }
+  .work-thumb { height: 200px; background: var(--sd-offwhite); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--sd-border); position: relative; overflow: hidden; }
+  .work-thumb-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .work-thumb-icon { font-size: 32px; opacity: 0.35; }
+  .work-thumb-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sd-mid); opacity: 0.5; }
+  .work-meta { padding: 22px 24px; }
+  .work-client { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sd-blue); margin-bottom: 6px; }
+  .work-desc { font-size: 14px; color: var(--sd-mid); line-height: 1.6; }
+  .work-tag { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; background: var(--sd-offwhite); color: var(--sd-mid); padding: 4px 10px; border-radius: 50px; }
+
+  /* CTA */
+  .cta { background: var(--sd-blue); padding: 100px 80px; text-align: center; position: relative; overflow: hidden; }
+  .cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(184,172,255,0.28) 0%, transparent 55%); }
+  .cta h2 { font-size: clamp(40px, 5vw, 66px); font-weight: 600; letter-spacing: 0; color: white; margin-bottom: 18px; position: relative; z-index: 1; }
+  .cta p { font-size: 17px; color: rgba(255,255,255,0.68); max-width: 460px; margin: 0 auto 44px; position: relative; z-index: 1; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; position: relative; z-index: 1; }
+  .btn-w { background: white; color: var(--sd-navy); padding: 14px 34px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+  .btn-w:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+  .btn-ow { border: 2px solid rgba(255,255,255,0.38); color: rgba(255,255,255,0.82); padding: 14px 34px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .btn-ow:hover { border-color: white; color: white; }
+
+  /* FOOTER */
+  footer { background: var(--sd-navy); padding: 40px 80px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.07); }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.28); }
+  .footer-brand { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.55); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .fade { opacity: 0; animation: fadeUp 0.65s ease forwards; }
+  .d1 { animation-delay: 0.08s; } .d2 { animation-delay: 0.2s; } .d3 { animation-delay: 0.32s; } .d4 { animation-delay: 0.44s; }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 20px; } nav ul { display: none; }
+    .sec { padding: 60px 20px; } .hero { padding: 100px 20px 56px; }
+    .hero h1 { font-size: 46px; } .hero-stats { gap: 28px; }
+    .grid-3, .template-grid, .work-grid { grid-template-columns: 1fr; }
+    .scope-intro, .invest-grid { grid-template-columns: 1fr; }
+    .menu-body-inner { grid-template-columns: 1fr; }
+    .menu-header { flex-wrap: wrap; padding: 22px 20px; }
+    .menu-body { padding: 0 20px 28px; }
+    footer { flex-direction: column; gap: 14px; text-align: center; }
+    .cta { padding: 64px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-wordmark" href="#">SketchDeck</a>
+  <ul>
+    <li><a href="#scope">Scope</a></li>
+    <li><a href="#investment">Investment</a></li>
+    <li><a href="#templates">Templates</a></li>
+    <li><a href="#work">Our Work</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge fade d1">✦ Proposal · April 2026</div>
+  <h1 class="fade d2">A Brand Guide<br>Built to <span class="hl">Scale With</span><br>Skylo.</h1>
+  <p class="hero-sub fade d3">A fully aligned visual and verbal identity system — from discovery through a finished brand guide and ready-to-deploy marketing templates.</p>
+  <div class="hero-actions fade d4">
+    <a href="#scope" class="btn-blue">View the Scope</a>
+    <a href="#investment" class="btn-ghost">See Investment</a>
+  </div>
+  <div class="hero-stats fade d4">
+    <div class="hero-stat"><strong>5</strong><span>Core modules to choose from</span></div>
+    <div class="hero-stat"><strong>$42K</strong><span>Full-scope investment</span></div>
+    <div class="hero-stat"><strong>3</strong><span>Add-on template types</span></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="sec intro" id="about">
+  <div class="intro-head">
+    <span class="sec-tag">The engagement</span>
+    <h2 class="sec-h">More than a style guide.<br>A system for the brand.</h2>
+    <p class="sec-p">This engagement is designed to get to the real thing — not just a document of fonts and colors, but a living resource that fully aligns your team on what Skylo stands for, how it sounds, and how it shows up.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-ico">🔎</span>
+      <h3>Grounded in Research</h3>
+      <p>We start with discovery — real conversations, stakeholder input, and AI-assisted competitive research to make sure everything that follows is built on something true.</p>
+    </div>
+    <div class="card">
+      <span class="card-ico">🎯</span>
+      <h3>Strategy-Led Design</h3>
+      <p>Visuals without strategy are decoration. We connect the creative choices to real brand positioning, audience insights, and differentiation — so everything is intentional.</p>
+    </div>
+    <div class="card">
+      <span class="card-ico">📦</span>
+      <h3>Ready to Use</h3>
+      <p>The deliverable isn't a PDF to archive — it's a guide your team will actually open. Plus optional templates that let you move immediately after launch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE / MENU -->
+<section class="sec scope-sec" id="scope">
+  <div class="scope-intro">
+    <div>
+      <span class="sec-tag">Scope of work</span>
+      <h2 class="sec-h">Build the engagement<br>that's right for you.</h2>
+      <p class="sec-p">Each module below is a distinct phase of work. Select what fits your needs — or take the full picture.</p>
+    </div>
+    <div>
+      <div class="scope-note">
+        <strong>How this works:</strong> Module 1 (Discovery) is required and anchors everything that follows. All other modules can be included or excluded based on what's most valuable to Skylo right now. Templates are add-ons that can be bundled with any scope.
+      </div>
+    </div>
+  </div>
+
+  <div class="menu">
+
+    <!-- MODULE 1: DISCOVERY -->
+    <div class="menu-item open" id="m1">
+      <div class="menu-header" onclick="toggleMenu('m1')">
+        <div class="menu-header-left">
+          <div class="menu-num">01</div>
+          <div class="menu-title">Discovery</div>
+          <span class="menu-badge">Required</span>
+        </div>
+        <div class="menu-price">$4,000</div>
+        <div class="menu-chevron">▾</div>
+      </div>
+      <div class="menu-body visible">
+        <div class="menu-body-inner">
+          <div>
+            <p class="menu-deliverables">What's included</p>
+            <ul class="menu-list">
+              <li>1–2 structured workshops or discovery meetings with key stakeholders</li>
+              <li>Audience and customer insight gathering</li>
+              <li>Business context, differentiators, and competitive landscape review</li>
+              <li>Purpose, vision, and mission exploration</li>
+              <li>Unearthing the creative vision behind Skylo's existing visual identity choices</li>
+              <li>AI-assisted whitespace and positioning research to identify opportunities</li>
+            </ul>
+            <p style="font-size:13px; color:var(--sd-mid); line-height:1.7;">Discovery is the foundation for every module that follows. Even if the scope is narrow, this step ensures all decisions are grounded in real insight — not assumptions.</p>
+          </div>
+          <div class="menu-side-card">
+            <div class="label">Module Investment</div>
+            <div class="amount">$4,000</div>
+            <div class="sub">Required for all engagements</div>
+            <div class="drow"><span>Format</span><span>Workshops / Interviews</span></div>
+            <div class="drow"><span>Meetings</span><span>1–2 sessions</span></div>
+            <div class="drow"><span>Deliverable</span><span>Synthesis summary</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 2: STRATEGY -->
+    <div class="menu-item" id="m2">
+      <div class="menu-header" onclick="toggleMenu('m2')">
+        <div class="menu-header-left">
+          <div class="menu-num">02</div>
+          <div class="menu-title">Brand Strategy</div>
+          <span class="menu-badge optional">Optional</span>
+        </div>
+        <div class="menu-price">$6,000</div>
+        <div class="menu-chevron">▾</div>
+      </div>
+      <div class="menu-body">
+        <div class="menu-body-inner">
+          <div>
+            <p class="menu-deliverables">What's included</p>
+            <ul class="menu-list">
+              <li>Purpose, vision, and mission statement development</li>
+              <li>Audience profile definition</li>
+              <li>Key differentiator articulation</li>
+              <li>Brand character traits workshop</li>
+              <li>Brand essence — the centering idea that bridges strategy to creative identity</li>
+            </ul>
+            <div class="deliverable-pill">📄 Deliverable: Presentation deck</div>
+            <p style="margin-top:16px; font-size:13px; color:var(--sd-mid); line-height:1.7;">Final strategy components feed directly into the brand guide if included in scope. If not, they're still a valuable standalone alignment tool.</p>
+          </div>
+          <div class="menu-side-card">
+            <div class="label">Module Investment</div>
+            <div class="amount">$6,000</div>
+            <div class="sub">Light strategy for alignment</div>
+            <div class="drow"><span>Status</span><span>Optional</span></div>
+            <div class="drow"><span>Format</span><span>Workshop + synthesis</span></div>
+            <div class="drow"><span>Deliverable</span><span>Presentation deck</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 3: VERBAL IDENTITY -->
+    <div class="menu-item" id="m3">
+      <div class="menu-header" onclick="toggleMenu('m3')">
+        <div class="menu-header-left">
+          <div class="menu-num">03</div>
+          <div class="menu-title">Verbal Identity &amp; Messaging</div>
+          <span class="menu-badge optional">Optional</span>
+        </div>
+        <div class="menu-price">$6,000 – $12,000</div>
+        <div class="menu-chevron">▾</div>
+      </div>
+      <div class="menu-body">
+        <div class="menu-body-inner">
+          <div>
+            <p class="menu-deliverables">Core verbal identity — $6,000</p>
+            <ul class="menu-list">
+              <li>Positioning statement</li>
+              <li>Tone and voice guidelines</li>
+              <li>Sample messaging across key use cases</li>
+              <li>Creative vision statement</li>
+            </ul>
+            <div class="optional-callout">
+              <p><strong>Optional add-on: Messaging workshop + framework — +$6,000</strong><br>A facilitated workshop and fully built messaging framework tied to specific audience motivators. Valuable for shaping how Skylo speaks across every customer touchpoint — sales, marketing, product, and beyond.</p>
+            </div>
+            <div class="deliverable-pill">📄 Deliverable: Presentation deck</div>
+          </div>
+          <div class="menu-side-card">
+            <div class="label">Module Investment</div>
+            <div class="amount">$6K – $12K</div>
+            <div class="sub">Core or full verbal identity</div>
+            <div class="drow"><span>Core only</span><span>$6,000</span></div>
+            <div class="drow"><span>With workshop</span><span>$12,000</span></div>
+            <div class="drow"><span>Status</span><span>Optional</span></div>
+            <div class="drow"><span>Deliverable</span><span>Presentation deck</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 4: VISUAL IDENTITY -->
+    <div class="menu-item" id="m4">
+      <div class="menu-header" onclick="toggleMenu('m4')">
+        <div class="menu-header-left">
+          <div class="menu-num">04</div>
+          <div class="menu-title">Visual Identity</div>
+          <span class="menu-badge optional">Optional</span>
+        </div>
+        <div class="menu-price">$8,000</div>
+        <div class="menu-chevron">▾</div>
+      </div>
+      <div class="menu-body">
+        <div class="menu-body-inner">
+          <div>
+            <p class="menu-deliverables">What's included</p>
+            <ul class="menu-list">
+              <li>Review of existing visual identity — recommended additions or refinements where needed</li>
+              <li>Design of up to 3 sample applications (mockups — not final production files)</li>
+              <li>Copywriting for sample application mockups</li>
+            </ul>
+            <p style="font-size:13px; color:var(--sd-mid); margin-top:14px; line-height:1.7;">This module is about bringing the identity to life in context — showing how Skylo looks when applied consistently across real-world surfaces. The mockups and any visual additions become core components of the brand guide if included.</p>
+            <div class="deliverable-pill">📄 Deliverable: Presentation deck + mockup files</div>
+          </div>
+          <div class="menu-side-card">
+            <div class="label">Module Investment</div>
+            <div class="amount">$8,000</div>
+            <div class="sub">Visual identity & applications</div>
+            <div class="drow"><span>Status</span><span>Optional</span></div>
+            <div class="drow"><span>Mockups</span><span>Up to 3</span></div>
+            <div class="drow"><span>Files included</span><span>Yes</span></div>
+            <div class="drow"><span>Deliverable</span><span>Deck + mockups</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 5: BRAND GUIDE -->
+    <div class="menu-item" id="m5">
+      <div class="menu-header" onclick="toggleMenu('m5')">
+        <div class="menu-header-left">
+          <div class="menu-num">05</div>
+          <div class="menu-title">Brand Guide</div>
+          <span class="menu-badge optional">Optional</span>
+        </div>
+        <div class="menu-price">$12,000</div>
+        <div class="menu-chevron">▾</div>
+      </div>
+      <div class="menu-body">
+        <div class="menu-body-inner">
+          <div>
+            <p class="menu-deliverables">What's included</p>
+            <ul class="menu-list">
+              <li>Copywriting and design of a fully evolved brand guide document</li>
+              <li>Incorporates outputs from all completed modules: strategy, verbal identity, and visual identity</li>
+              <li>Guidance for consistent application across channels and assets</li>
+              <li>Built from and evolved from Skylo's existing guidelines document (files must be provided to SketchDeck)</li>
+            </ul>
+            <p style="font-size:13px; color:var(--sd-mid); margin-top:14px; line-height:1.7;">The brand guide is the final destination — the document your team, partners, and vendors will use to stay aligned. It brings every component from earlier modules into a single, polished, usable system.</p>
+          </div>
+          <div class="menu-side-card">
+            <div class="label">Module Investment</div>
+            <div class="amount">$12,000</div>
+            <div class="sub">Full brand guide production</div>
+            <div class="drow"><span>Status</span><span>Optional</span></div>
+            <div class="drow"><span>Requires</span><span>Existing guidelines</span></div>
+            <div class="drow"><span>Format</span><span>Design + copywriting</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INVESTMENT SUMMARY -->
+<section class="sec investment-sec" id="investment">
+  <span class="sec-tag">Investment summary</span>
+  <h2 class="sec-h">What the full<br>scope adds up to.</h2>
+  <p class="sec-p">Full engagement at maximum scope. Every module can be excluded except Discovery.</p>
+  <div class="invest-grid">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Module</th><th>Description</th><th>Investment</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>01 — Discovery</strong></td>
+            <td>Workshops, stakeholder research, AI-assisted positioning analysis</td>
+            <td><strong>$4,000</strong></td>
+          </tr>
+          <tr>
+            <td>02 — Brand Strategy <span class="opt-tag">Optional</span></td>
+            <td>Purpose/vision/mission, audience profiles, brand character + essence</td>
+            <td>$6,000</td>
+          </tr>
+          <tr>
+            <td>03 — Verbal Identity <span class="opt-tag">Optional</span></td>
+            <td>Core: positioning, TOV, sample messaging. Full: + messaging workshop</td>
+            <td>$6,000 – $12,000</td>
+          </tr>
+          <tr>
+            <td>04 — Visual Identity <span class="opt-tag">Optional</span></td>
+            <td>Identity refinements, up to 3 application mockups, copywriting</td>
+            <td>$8,000</td>
+          </tr>
+          <tr>
+            <td>05 — Brand Guide <span class="opt-tag">Optional</span></td>
+            <td>Full guide production incorporating all completed modules</td>
+            <td>$12,000</td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong>Full Scope Total</strong></td>
+            <td><strong>$42,000</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="invest-side">
+      <div class="total-card">
+        <p>Full Scope Investment</p>
+        <strong>$42,000</strong>
+        <span>Discovery through Brand Guide</span>
+      </div>
+      <div class="detail-card">
+        <div class="drow"><span>Discovery (required)</span><span>$4,000</span></div>
+        <div class="drow"><span>Minimum engagement</span><span>$4,000</span></div>
+        <div class="drow"><span>Payment Terms</span><span>Net 30</span></div>
+        <div class="drow"><span>Billing Entity</span><span>SketchDeck, LLC</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<section class="sec templates-sec" id="templates">
+  <div class="templates-head">
+    <span class="sec-tag">Template add-ons</span>
+    <h2 class="sec-h">Hit the ground<br>running post-launch.</h2>
+    <p class="sec-p">Ready-to-use marketing templates built to Skylo's brand. Can be bundled with any scope.</p>
+  </div>
+  <div class="template-grid">
+    <div class="template-card">
+      <span class="template-ico">📱</span>
+      <div class="template-name">Social Ad Template</div>
+      <p class="template-desc">A production-ready social ad template set — sized, branded, and built so your team can move fast without going off-brand.</p>
+      <div class="template-pricing">
+        <div>
+          <div class="template-credits">15 credits</div>
+          <span style="font-size:12px; color:rgba(255,255,255,0.35);">approx</span>
+        </div>
+        <div class="template-usd">~$1,875</div>
+      </div>
+    </div>
+    <div class="template-card">
+      <span class="template-ico">📋</span>
+      <div class="template-name">Case Study Template</div>
+      <p class="template-desc">A polished, flexible case study format that showcases Skylo's work and outcomes with a consistent, professional voice and visual system.</p>
+      <div class="template-pricing">
+        <div>
+          <div class="template-credits">19 credits</div>
+          <span style="font-size:12px; color:rgba(255,255,255,0.35);">approx</span>
+        </div>
+        <div class="template-usd">~$2,375</div>
+      </div>
+    </div>
+    <div class="template-card">
+      <span class="template-ico">📊</span>
+      <div class="template-name">PowerPoint Deck</div>
+      <p class="template-desc">Up to 15 slides — a versatile, brand-aligned presentation deck for sales, investor updates, or partner communications.</p>
+      <div class="template-pricing">
+        <div>
+          <div class="template-credits">49 credits</div>
+          <span style="font-size:12px; color:rgba(255,255,255,0.35);">approx</span>
+        </div>
+        <div class="template-usd">~$6,125</div>
+      </div>
+    </div>
+  </div>
+  <div class="templates-note">
+    <p><strong>Pricing note:</strong> Templates are scoped in SketchDeck credits at a rate of <strong>$125 per credit</strong>. Estimates above are approximate and will be confirmed at the time of scoping. Templates can be added to any engagement and are invoiced separately.</p>
+  </div>
+</section>
+
+<!-- WORK EXAMPLES -->
+<section class="sec work-sec" id="work">
+  <span class="sec-tag">Our work</span>
+  <h2 class="sec-h">What we've built<br>for brands like yours.</h2>
+  <p class="sec-p">A sample of recent brand, messaging, and design work across categories. More to come.</p>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="work-thumb">
+        <div class="work-thumb-placeholder">
+          <div class="work-thumb-icon">🖼️</div>
+          <div class="work-thumb-label">Coming soon</div>
+        </div>
+      </div>
+      <div class="work-meta">
+        <div class="work-client">Client TBD</div>
+        <div class="work-desc">Work example description will go here once files are uploaded.</div>
+        <span class="work-tag">Brand Guide</span>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb">
+        <div class="work-thumb-placeholder">
+          <div class="work-thumb-icon">🖼️</div>
+          <div class="work-thumb-label">Coming soon</div>
+        </div>
+      </div>
+      <div class="work-meta">
+        <div class="work-client">Client TBD</div>
+        <div class="work-desc">Work example description will go here once files are uploaded.</div>
+        <span class="work-tag">Verbal Identity</span>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb">
+        <div class="work-thumb-placeholder">
+          <div class="work-thumb-icon">🖼️</div>
+          <div class="work-thumb-label">Coming soon</div>
+        </div>
+      </div>
+      <div class="work-meta">
+        <div class="work-client">Client TBD</div>
+        <div class="work-desc">Work example description will go here once files are uploaded.</div>
+        <span class="work-tag">Visual Identity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <h2>Let's build<br>something lasting.</h2>
+  <p>Ready to move forward or want to talk through the scope? Reach out and we'll get a conversation on the calendar.</p>
+  <div class="cta-btns">
+    <a href="https://hello.sketchdeck.com/meetings/jherelle" target="_blank" class="btn-w">💬 Talk Through the Scope</a>
+    <a href="mailto:jordan@sketchdeck.com" class="btn-ow">Send Us a Note</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">SketchDeck</div>
+  <p>SketchDeck, LLC &middot; 105 Maxess Rd, Suite N201, Melville NY 11747 &middot; jordan@sketchdeck.com</p>
+</footer>
+
+<script>
+  function toggleMenu(id) {
+    const item = document.getElementById(id);
+    const body = item.querySelector('.menu-body');
+    const isOpen = item.classList.contains('open');
+    item.classList.toggle('open', !isOpen);
+    body.classList.toggle('visible', !isOpen);
+  }
+
+  // Intersection observer for subtle fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        e.target.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.card, .menu-item, .template-card, .work-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
