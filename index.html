@@ -124,6 +124,9 @@
   tr:last-child td { border-bottom: none; background: rgba(0,116,224,0.04); font-family: 'Syne', sans-serif; font-weight: 600; color: var(--sd-navy); font-size: 16px; border-top: 2px solid var(--sd-blue); }
   tr:hover:not(:last-child) td { background: rgba(22,22,56,0.018); }
   .opt-tag { font-size: 10px; font-weight: 600; background: rgba(184,172,255,0.2); color: #8B7FCC; padding: 2px 9px; border-radius: 50px; letter-spacing: 0.06em; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+  .sub-row td { background: rgba(184,172,255,0.04) !important; border-bottom: 1px solid rgba(22,22,56,0.06); }
+  .sub-row .sub-checkbox:disabled { opacity: 0.35; cursor: not-allowed; }
+  .sub-row .sub-checkbox:not(:disabled) { opacity: 1; }
   .invest-side { display: flex; flex-direction: column; gap: 14px; }
   .total-card { background: var(--sd-blue); border-radius: 16px; padding: 34px 26px; }
   .total-card p { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.68); margin-bottom: 6px; }
@@ -249,7 +252,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="badge fade d1">✦ Proposal · April 2026</div>
-  <h1 class="fade d2">A Brand Guide<br>Built to <span class="hl">Scale With</span><br>Skylo.</h1>
+  <h1 class="fade d2">A Brand Guide<br>Built to <span class="hl">Scale</span><br>With Skylo.</h1>
   <p class="hero-sub fade d3">A fully aligned visual and verbal identity system, from discovery through a finished brand guide and ready-to-deploy marketing templates.</p>
   <div class="hero-actions fade d4">
     <a href="#scope" class="btn-blue">View the Scope</a>
@@ -512,8 +515,14 @@
           <tr>
             <td style="text-align:center;"><input type="checkbox" class="module-checkbox" id="mod-03" data-module="03" data-price="6000"></td>
             <td>03. Verbal Identity <span class="opt-tag">Optional</span></td>
-            <td>Core: positioning, TOV, sample messaging. Full: + messaging workshop</td>
+            <td>Core: positioning, TOV, sample messaging</td>
             <td>$6,000</td>
+          </tr>
+          <tr class="sub-row" id="mod-03-addon-row">
+            <td style="text-align:center;"><input type="checkbox" class="module-checkbox sub-checkbox" id="mod-03-addon" data-module="03-addon" data-price="6000" disabled></td>
+            <td style="padding-left:48px; font-size:13px; color:var(--sd-mid);"><span style="color:var(--sd-lavender); margin-right:6px;">↳</span> Messaging workshop + framework <span class="opt-tag">Add-on</span></td>
+            <td style="font-size:13px; color:var(--sd-mid);">Facilitated workshop and full messaging framework</td>
+            <td style="font-size:13px; color:var(--sd-mid);">+$6,000</td>
           </tr>
           <tr>
             <td style="text-align:center;"><input type="checkbox" class="module-checkbox" id="mod-04" data-module="04" data-price="8000"></td>
@@ -871,6 +880,18 @@
         selectedModules[moduleNum] = price;
       } else {
         delete selectedModules[moduleNum];
+      }
+
+      // Handle Verbal Identity parent/child relationship
+      if (moduleNum === '03') {
+        const addonCheckbox = document.getElementById('mod-03-addon');
+        if (this.checked) {
+          addonCheckbox.disabled = false;
+        } else {
+          addonCheckbox.disabled = true;
+          addonCheckbox.checked = false;
+          delete selectedModules['03-addon'];
+        }
       }
 
       updateBudget();
